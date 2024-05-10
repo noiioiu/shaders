@@ -25,7 +25,7 @@ float dSphere(vec4 v, vec4 c, float r) {
 }
 
 float dTorus(vec3 v, float R, float r) {
-    return length(vec2(v.z, length(v.xy)-R))-r;
+    return length(vec2(length(v.xy)-R, v.z))-r;
 }
 
 float dTorus(vec4 v, float r1, float r2, float r) {
@@ -36,7 +36,6 @@ float dTorus(vec4 v, float r1, float r2, float r) {
 float dSphircle(vec4 v, float R, float r) {
     return length(vec2(length(v.xyz)-R, v.w))-r;
 }
-
 
 float dCube(vec2 v, vec2 d) {
     return .5*length(abs(v)-d + abs(abs(v)-d));
