@@ -17,7 +17,8 @@ float dist (vec4 v) {
     vec4 rot2 = (vec4(0., sin(u_time), 0., cos(u_time)));
 
     //return dCube(quaternionProduct(rot1, v, rot2), vec4(.5));
-    return dTorus(quaternionProduct(rot1, v, rot2), .5,.5,.1);
+    //return dTorus(quaternionProduct(rot1, v, rot2), .5,.5,.1);
+    return dSphircle(quaternionProduct(rot1, v.xywz, -rot1), .7,.1);
     //return dOrthoplex(quaternionProduct(rot1, vec4(v), rot2), 1.);
 }
 
@@ -34,7 +35,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     for(;i++<128;) {
         t = dist(vec4(v, .5*cos(u_time)));
         v += d*t;
-        //v = (fract(v/8.+.5)-.5)*8.;
+        v = (fract(v/8.+.5)-.5)*8.;
         if (t<0.0001 || t > 1024.) break;
     }
 

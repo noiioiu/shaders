@@ -32,6 +32,12 @@ float dTorus(vec4 v, float r1, float r2, float r) {
     return length(vec2(length(v.xy)-r1, length(v.zw)-r2))-r;
 }
 
+// Cartesian product of sphere and circle.
+float dSphircle(vec4 v, float R, float r) {
+    return length(vec2(length(v.xyz)-R, v.w))-r;
+}
+
+
 float dCube(vec2 v, vec2 d) {
     return .5*length(abs(v)-d + abs(abs(v)-d));
 }
