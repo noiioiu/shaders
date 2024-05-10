@@ -28,6 +28,10 @@ float dTorus(vec3 v, float R, float r) {
     return length(vec2(v.z, length(v.xy)-R))-r;
 }
 
+float dTorus(vec4 v, float r1, float r2, float r) {
+    return length(vec2(length(v.xy)-r1, length(v.zw)-r2))-r;
+}
+
 float dCube(vec2 v, vec2 d) {
     return .5*length(abs(v)-d + abs(abs(v)-d));
 }
