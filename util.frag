@@ -22,6 +22,21 @@ float maximum(float x, float y, float z, float w, float s, float t, float u, flo
     return max(maximum(x,y,z,w), maximum(s,t,u,v));
 }
 
+struct Light2 {
+    vec3 Colour;
+    vec2 Location;
+};
+
+struct Light3 {
+    vec3 Colour;
+    vec3 Location;
+};
+
+struct Light4 {
+    vec3 Colour;
+    vec4 Location;
+};
+
 #define EPSILON .00001
 #define EPS vec2(EPSILON, 0.)
 #define grad2(f,v) (vec2( f((v)+EPS.xy) - f((v)-EPS.xy),\

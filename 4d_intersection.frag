@@ -21,8 +21,9 @@ float dist (vec4 v) {
     //return dSphircle(quaternionProduct(rot2, v.zywx, rot1), 1.,.4);
     float torus = dTorus(quaternionProduct(rot2, v.zywx, rot1), 1., 1.,.2);
     v = quaternionProduct(rot1, v.yzxw );
-    float box = length(vec4(v.yx,v.zw-clamp(v.zw,-.2,.2)))-.5;//dOrthoplex(quaternionProduct(rot1,v+vec4(0,0,0,0), rot2), (2.));
-    return min(torus, box);
+    //float box = length(vec4(v.yx,v.zw-clamp(v.zw,-.4,.4)))-1.;
+    float box = dCube(quaternionProduct(rot1,v+vec4(0,0,0,0), rot2), vec4(1.));
+    return min(torus, torus);
     //return dSphircle2(quaternionProduct(rot1, v.zyxw ,rot2 ), 1., .5);
     //return dOrthoplex(quaternionProduct(rot1, vec4(v), rot2), 1.);
 }
@@ -37,20 +38,20 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec4 v = vec4(0,0,-4., sin(u_time/16.));
     vec4 d = normalize(vec4(uv, 1., 0.));
     int i=0;
-    for(;i++<128;) {
+    for(;i++<256;) {
         t = dist(v);
         v += d*t;
         //v = (fract(v/16.+.5)-.5)*16.;
         if (t<0.01 || t > 1024.) break;
     }
     vec4 n = normalize(grad4(dist, v));
-    vec4 r = reflect(v, n);
-    vec4 red   = normalize(v-vec4(1.,3.,-2.,5.));
-    vec4 green  = normalize(v-vec4(-1.,2.,2.,-5.));
-    vec4 blue = normalize(v);
+    vec4 r = reflect(d, n);
+    vec4 red   = (vec4(0.,0.,0.,5.) -v); red/=pow(length(red),4.);
+    vec4 blue  = (vec4(0.,0.,0.,-5.)-v); blue/=pow(length(blue),4.);;
+    vec4 green = (vec4(5,2,0,0)     -v); green/=pow(length(green),4.);
 
-    vec3 col = vec3(smoothstep(17.5,3.2,(length(v))));
-    col *= vec3(.6*dot(r, red), .6*dot(r, green), .8*dot(r,blue));
+    vec3 col = vec3((length(v)<1024.)?1:0);//vec3(smoothstep(17.5,3.2,(length(v))));
+    col *= clamp(vec3(dot(d,vec4(.3))),0.,1.)*vec3(1,0,1) + .3*clamp(vec3(150.*dot(r, red), 100.*dot(r, green), 150.*dot(r,blue)), 0., 1.);
 
 
     // Output to screen
