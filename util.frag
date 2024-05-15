@@ -22,19 +22,19 @@ float maximum(float x, float y, float z, float w, float s, float t, float u, flo
     return max(maximum(x,y,z,w), maximum(s,t,u,v));
 }
 
-#define EPSILON .00000001
+#define EPSILON .00001
 #define EPS vec2(EPSILON, 0.)
-#define grad2(f,v) (vec2( f((v)+EPS.xy) - f((v)+EPS.xy),\
+#define grad2(f,v) (vec2( f((v)+EPS.xy) - f((v)-EPS.xy),\
                           f((v)+EPS.yx) - f((v)-EPS.yx)\
                           )/(2.*EPSILON))
-#define grad3(f,v) (vec3( f((v)+EPS.xyy) - f((v)+EPS.xyy),\
-                          f((v)+EPS.yxy) - f((v)+EPS.yxy),\
-                          f((v)+EPS.yyx) - f((v)+EPS.yyx)\
+#define grad3(f,v) (vec3( f((v)+EPS.xyy) - f((v)-EPS.xyy),\
+                          f((v)+EPS.yxy) - f((v)-EPS.yxy),\
+                          f((v)+EPS.yyx) - f((v)-EPS.yyx)\
                           )/(2.*EPSILON))
-#define grad4(f,v) (vec4( f((v)+EPS.xyyy) - f((v)+EPS.xyyy),\
-                          f((v)+EPS.yxyy) - f((v)+EPS.yxyy),\
-                          f((v)+EPS.yyxy) - f((v)+EPS.yyxy),\
-                          f((v)+EPS.yyyx) - f((v)+EPS.yyyx)\
+#define grad4(f,v) (vec4( f((v)+EPS.xyyy) - f((v)-EPS.xyyy),\
+                          f((v)+EPS.yxyy) - f((v)-EPS.yxyy),\
+                          f((v)+EPS.yyxy) - f((v)-EPS.yyxy),\
+                          f((v)+EPS.yyyx) - f((v)-EPS.yyyx)\
                           )/(2.*EPSILON))
 
 // Multiply up to four quaternions.
