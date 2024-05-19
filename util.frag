@@ -1,3 +1,6 @@
+#define TWOPI 6.2831853
+
+
 float minimum(float x, float y) {return min(x,y);}
 float minimum(float x, float y, float z) {return min(min(x,y), z);}
 float minimum(float x, float y, float z, float w) {return min(min(x,y), min(z,w));}
@@ -20,6 +23,10 @@ float maximum(float x, float y, float z, float w, float s, float t, float u) {
 }
 float maximum(float x, float y, float z, float w, float s, float t, float u, float v) {
     return max(maximum(x,y,z,w), maximum(s,t,u,v));
+}
+
+mat2 rot2d(float t) {
+    return mat2(cos(t), sin(t), -sin(t), cos(t));
 }
 
 struct Light2 {
