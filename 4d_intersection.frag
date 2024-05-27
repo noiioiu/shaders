@@ -50,7 +50,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     d.yw = rot2d(TWOPI*u_mouse.y/u_resolution.y)*d.yw;
     vec4 v1 = v;
     int i=0;
-    for(;i++<64;) {
+    for(;i++<128;) {
         t = dist(v);
         v += d*t;
         //v = (fract(v/16.+.5)-.5)*16.;

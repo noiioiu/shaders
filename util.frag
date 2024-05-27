@@ -59,6 +59,26 @@ struct Light4 {
                           f((v)+EPS.yyyx) - f((v)-EPS.yyyx)\
                           )/(2.*EPSILON))
 
+vec2 complexPower(vec2 z, float n) {
+    float t = atan(z.y, z.x);
+    float r = length(z);
+    return pow(r, n)*vec2(cos(n*t), sin(n*t));
+}
+
+// Multiply up to five complex numbers.
+vec2 complexProduct(vec2 p, vec2 q) {
+    return vec2(p.x*q.x-p.y*q.y, p.x*q.y+p.y*q.x);
+}
+vec2 complexProduct(vec2 p, vec2 q, vec2 r) {
+    return complexProduct(p,complexProduct(q,r));
+}
+vec2 complexProduct(vec2 p, vec2 q, vec2 r, vec2 s) {
+    return complexProduct(complexProduct(p,q),complexProduct(r,s));
+}
+vec2 complexProduct(vec2 p, vec2 q, vec2 r, vec2 s, vec2 t) {
+    return complexProduct(complexProduct(p,q),complexProduct(r,s), t);
+}
+
 // Multiply up to four quaternions.
 vec4 quaternionProduct(vec4 p, vec4 q) {
     return vec4(-dot(p.yzw,q.yzw), cross(p.yzw, q.yzw)) + p.x*q + q.x*p;
