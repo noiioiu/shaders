@@ -62,7 +62,7 @@ struct Light4 {
 vec2 complexPower(vec2 z, float n) {
     float t = atan(z.y, z.x);
     float r = length(z);
-    return pow(r, n)*vec2(cos(n*t), sin(n*t));
+    return pow(r,n)*vec2(cos(n*t), sin(n*t));
 }
 
 // Multiply up to five complex numbers.
