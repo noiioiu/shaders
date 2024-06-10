@@ -2,7 +2,7 @@
 precision mediump float;
 #endif
 #extension GL_GOOGLE_include_directive : enable
-#include "util.frag"
+#include "raymarch_common.frag"
 
 uniform vec2 u_resolution;  // Canvas size (width,height)
 uniform vec2 u_mouse;       // mouse position in screen pixels
